@@ -3,6 +3,22 @@ const axios = require('axios');
 
 const { REPLICATE_API_TOKEN } = process.env;
 
+const replicateHeader = () => {
+    return {
+        'Authorization': `Bearer ${REPLICATE_API_TOKEN}`,
+        'Content-Type': 'application/json'
+      }
+}
+
+const getPredictionResults = async (url) => {
+    try {
+        const response = await axios.get(url, {headers: replicateHeader()})
+        console.log(response.data);
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 const llama_3_70b = async () => {
     const data = {
         input: {
@@ -24,10 +40,7 @@ const llama_3_70b = async () => {
       const config = {
         method: 'post',
         url: 'https://api.replicate.com/v1/models/meta/meta-llama-3-70b-instruct/predictions',
-        headers: {
-          'Authorization': `Bearer ${REPLICATE_API_TOKEN}`,
-          'Content-Type': 'application/json'
-        },
+        headers: replicateHeader(),
         data: JSON.stringify(data)
       };
 
@@ -42,4 +55,4 @@ const llama_3_70b = async () => {
       }
 }
 
-llama_3_70b();
+getPredictionResults("https://api.replicate.com/v1/predictions/kdx5yr2gm1rj40chy3ya0wg77c");
