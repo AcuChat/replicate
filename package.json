@@ -7,5 +7,10 @@
   },
   "author": "Michael Wood",
   "license": "SEE LICENSE IN license.md",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "replicate": "^0.32.1"
+  }
 }
